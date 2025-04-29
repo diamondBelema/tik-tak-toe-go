@@ -51,7 +51,7 @@ func showWinnerAlert(window fyne.Window, winner string, buttons *Buttons) {
 
 func isGameOver() (bool, string) {
 	// Check rows and columns
-	for i := 0; i < 3; i++ {
+	for i := range 3 {
 		if board[i][0] != "" && board[i][0] == board[i][1] && board[i][1] == board[i][2] {
 			return true, board[i][0]
 		}
@@ -96,20 +96,20 @@ func main() {
 	buttons := &Buttons{}
 	gridItems := []fyne.CanvasObject{}
 
-	for i := 0; i < 3; i++ {
+	for i := range 3 {
 		for j := 0; j < 3; j++ {
 			i, j := i, j // capture loop vars
 			btn := widget.NewButton("", func() {
 				updateButton(buttons.Grid[i][j], i, j, myWindow, buttons)
 			})
-			btn.Resize(fyne.NewSize(100, 100))
+			btn.Resize(fyne.NewSize(300, 300))
 			buttons.Grid[i][j] = btn
 			gridItems = append(gridItems, btn)
 		}
 	}
 
 	grid := container.NewGridWithColumns(3, gridItems...)
-	myWindow.Resize(fyne.NewSize(300, 300))
+	myWindow.Resize(fyne.NewSize(400, 400))
 	myWindow.SetContent(grid)
 	myWindow.ShowAndRun()
 }
